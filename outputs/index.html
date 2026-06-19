@@ -1,0 +1,1636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy 27th Birthday, Prathyusha Akka</title>
+  <style>
+    :root {
+      --pink: #ff6fae;
+      --rose: #ff9cc8;
+      --purple: #8b5cf6;
+      --violet: #4c1d95;
+      --gold: #ffd166;
+      --white: #fff8fd;
+      --ink: #35113f;
+      --glass: rgba(255, 255, 255, 0.2);
+      --glass-strong: rgba(255, 255, 255, 0.34);
+      --border: rgba(255, 255, 255, 0.42);
+      --shadow: 0 24px 80px rgba(89, 24, 91, 0.22);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--ink);
+      font-family: "Segoe UI", "Trebuchet MS", Arial, sans-serif;
+      background:
+        radial-gradient(circle at 12% 18%, rgba(255, 209, 102, 0.42), transparent 24rem),
+        radial-gradient(circle at 82% 12%, rgba(255, 111, 174, 0.42), transparent 22rem),
+        linear-gradient(135deg, #fff5fb 0%, #ffe3f2 29%, #e9dcff 66%, #fff9ec 100%);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -4;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.42) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.35) 1px, transparent 1px);
+      background-size: 62px 62px;
+      mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.58), transparent);
+      pointer-events: none;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .loading-screen {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: grid;
+      place-items: center;
+      background:
+        radial-gradient(circle at 50% 38%, rgba(255, 209, 102, 0.35), transparent 18rem),
+        linear-gradient(135deg, #fff8fd, #f6dbff 48%, #ffe7f4);
+      transition: opacity 0.8s ease, visibility 0.8s ease;
+    }
+
+    .loading-screen.hide {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .loader-card {
+      width: min(88vw, 420px);
+      padding: 36px 28px;
+      text-align: center;
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      background: rgba(255, 255, 255, 0.44);
+      backdrop-filter: blur(22px);
+      box-shadow: var(--shadow);
+    }
+
+    .loader-heart {
+      width: 58px;
+      height: 58px;
+      margin: 0 auto 20px;
+      position: relative;
+      transform: rotate(45deg);
+      background: var(--pink);
+      animation: pulseHeart 1.2s ease-in-out infinite;
+      box-shadow: 0 0 34px rgba(255, 111, 174, 0.7);
+    }
+
+    .loader-heart::before,
+    .loader-heart::after {
+      content: "";
+      position: absolute;
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: var(--pink);
+    }
+
+    .loader-heart::before {
+      left: -29px;
+    }
+
+    .loader-heart::after {
+      top: -29px;
+    }
+
+    .loader-card h1 {
+      margin: 0 0 10px;
+      font-size: clamp(2rem, 8vw, 3.7rem);
+      color: var(--violet);
+    }
+
+    .loader-card p {
+      margin: 0;
+      color: rgba(53, 17, 63, 0.72);
+      line-height: 1.6;
+    }
+
+    .progress {
+      height: 8px;
+      overflow: hidden;
+      border-radius: 999px;
+      margin-top: 24px;
+      background: rgba(139, 92, 246, 0.16);
+    }
+
+    .progress span {
+      display: block;
+      height: 100%;
+      width: 0;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--pink), var(--purple), var(--gold));
+      animation: loadBar 2.25s ease forwards;
+    }
+
+    .ambient {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .heart,
+    .sparkle,
+    .balloon {
+      position: absolute;
+      will-change: transform, opacity;
+    }
+
+    .heart {
+      width: 18px;
+      height: 18px;
+      transform: rotate(45deg);
+      background: rgba(255, 111, 174, 0.54);
+      animation: floatUp var(--duration, 12s) linear infinite;
+      filter: drop-shadow(0 0 12px rgba(255, 111, 174, 0.34));
+    }
+
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: inherit;
+    }
+
+    .heart::before {
+      left: -9px;
+    }
+
+    .heart::after {
+      top: -9px;
+    }
+
+    .sparkle {
+      width: 7px;
+      height: 7px;
+      background: var(--gold);
+      transform: rotate(45deg);
+      animation: twinkle var(--duration, 3s) ease-in-out infinite;
+      box-shadow: 0 0 18px rgba(255, 209, 102, 0.84);
+    }
+
+    .balloon {
+      width: 38px;
+      height: 50px;
+      border-radius: 50% 50% 46% 46%;
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.76), var(--balloon));
+      animation: balloonDrift var(--duration, 13s) ease-in-out infinite;
+      box-shadow: inset -8px -8px 16px rgba(89, 24, 91, 0.13), 0 16px 28px rgba(89, 24, 91, 0.13);
+    }
+
+    .balloon::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50px;
+      width: 1px;
+      height: 62px;
+      background: rgba(76, 29, 149, 0.26);
+    }
+
+    .nav {
+      position: fixed;
+      left: 50%;
+      top: 18px;
+      z-index: 20;
+      width: min(940px, calc(100% - 24px));
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 12px 10px 16px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.38);
+      backdrop-filter: blur(20px);
+      box-shadow: 0 16px 46px rgba(89, 24, 91, 0.16);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+      font-weight: 800;
+      color: var(--violet);
+      white-space: nowrap;
+    }
+
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--pink), var(--purple));
+      color: white;
+      box-shadow: 0 8px 20px rgba(139, 92, 246, 0.28);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .nav-links::-webkit-scrollbar {
+      display: none;
+    }
+
+    .nav-links a,
+    .music-btn,
+    .primary-btn,
+    .ghost-btn,
+    .lightbox button {
+      border: 0;
+      cursor: pointer;
+      border-radius: 999px;
+      min-height: 40px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .nav-links a {
+      padding: 10px 13px;
+      color: rgba(53, 17, 63, 0.75);
+      font-size: 0.94rem;
+      white-space: nowrap;
+    }
+
+    .nav-links a:hover {
+      background: rgba(255, 255, 255, 0.46);
+      color: var(--violet);
+    }
+
+    .music-btn {
+      display: inline-grid;
+      place-items: center;
+      flex: 0 0 42px;
+      width: 42px;
+      color: white;
+      background: linear-gradient(135deg, var(--pink), var(--purple));
+      box-shadow: 0 12px 24px rgba(139, 92, 246, 0.25);
+    }
+
+    .music-btn.playing {
+      background: linear-gradient(135deg, var(--gold), var(--pink));
+    }
+
+    main {
+      position: relative;
+      z-index: 1;
+    }
+
+    section {
+      padding: 100px max(22px, 5vw);
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding-top: 110px;
+      overflow: hidden;
+    }
+
+    .hero-inner {
+      width: min(1120px, 100%);
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(300px, 0.9fr);
+      gap: 44px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0 0 18px;
+      padding: 8px 12px;
+      border: 1px solid rgba(255, 209, 102, 0.64);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.36);
+      color: var(--violet);
+      font-size: 0.95rem;
+      font-weight: 700;
+      backdrop-filter: blur(18px);
+    }
+
+    .hero h1,
+    .section-title h2 {
+      margin: 0;
+      color: var(--violet);
+      line-height: 1.02;
+      letter-spacing: 0;
+    }
+
+    .hero h1 {
+      max-width: 760px;
+      font-size: clamp(3.2rem, 10vw, 8.9rem);
+      text-wrap: balance;
+      text-shadow: 0 12px 32px rgba(139, 92, 246, 0.12);
+    }
+
+    .hero h1 span {
+      display: block;
+      color: transparent;
+      background: linear-gradient(100deg, var(--pink), var(--purple), #b8860b);
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+
+    .hero-copy {
+      max-width: 650px;
+      margin: 24px 0 32px;
+      color: rgba(53, 17, 63, 0.75);
+      font-size: clamp(1.05rem, 2.1vw, 1.34rem);
+      line-height: 1.75;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .primary-btn,
+    .ghost-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 13px 18px;
+      font-weight: 800;
+    }
+
+    .primary-btn {
+      color: white;
+      background: linear-gradient(135deg, var(--pink), var(--purple));
+      box-shadow: 0 16px 34px rgba(139, 92, 246, 0.28);
+    }
+
+    .ghost-btn {
+      color: var(--violet);
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.38);
+      backdrop-filter: blur(18px);
+    }
+
+    .primary-btn:hover,
+    .ghost-btn:hover,
+    .music-btn:hover,
+    .lightbox button:hover {
+      transform: translateY(-2px);
+    }
+
+    .portrait-stage {
+      position: relative;
+      min-height: 560px;
+      display: grid;
+      place-items: center;
+    }
+
+    .halo {
+      position: absolute;
+      width: min(430px, 84vw);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle, rgba(255, 255, 255, 0.52), transparent 58%),
+        conic-gradient(from 30deg, rgba(255, 209, 102, 0.76), rgba(255, 111, 174, 0.58), rgba(139, 92, 246, 0.58), rgba(255, 209, 102, 0.76));
+      filter: blur(4px);
+      animation: slowSpin 18s linear infinite;
+      opacity: 0.86;
+    }
+
+    .cake-card {
+      position: relative;
+      width: min(390px, 92vw);
+      min-height: 470px;
+      display: grid;
+      align-content: center;
+      justify-items: center;
+      gap: 22px;
+      padding: 34px 28px;
+      border: 1px solid var(--border);
+      border-radius: 32px;
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.56), rgba(255, 255, 255, 0.2));
+      backdrop-filter: blur(24px);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .cake-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.54), transparent);
+      transform: translateX(-120%);
+      animation: shine 5s ease-in-out infinite;
+    }
+
+    .cake {
+      position: relative;
+      width: 230px;
+      height: 210px;
+      display: grid;
+      justify-items: center;
+      align-content: end;
+    }
+
+    .candle {
+      position: absolute;
+      top: 0;
+      width: 16px;
+      height: 58px;
+      border-radius: 8px;
+      background: repeating-linear-gradient(45deg, white 0 7px, var(--pink) 7px 14px);
+      box-shadow: 0 8px 18px rgba(89, 24, 91, 0.12);
+    }
+
+    .flame {
+      position: absolute;
+      top: -24px;
+      left: 50%;
+      width: 22px;
+      height: 30px;
+      border-radius: 50% 50% 50% 0;
+      background: radial-gradient(circle at 55% 55%, #fff8b7 0 25%, #ffd166 36%, #ff7b54 78%);
+      transform: translateX(-50%) rotate(-40deg);
+      filter: drop-shadow(0 0 18px rgba(255, 209, 102, 0.9));
+      animation: flicker 0.32s infinite alternate;
+    }
+
+    .tier {
+      position: absolute;
+      bottom: var(--bottom);
+      width: var(--width);
+      height: 56px;
+      border-radius: 18px 18px 12px 12px;
+      background: linear-gradient(180deg, #fff 0 22%, var(--color) 23% 100%);
+      box-shadow: 0 16px 30px rgba(89, 24, 91, 0.12);
+    }
+
+    .tier::before {
+      content: "";
+      position: absolute;
+      top: 17px;
+      left: 12px;
+      right: 12px;
+      height: 15px;
+      border-radius: 0 0 14px 14px;
+      background: radial-gradient(circle at 10px -3px, white 0 13px, transparent 14px) 0 0 / 34px 22px repeat-x;
+    }
+
+    .cake-title {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+
+    .cake-title strong {
+      display: block;
+      font-size: clamp(2.2rem, 8vw, 4rem);
+      color: var(--violet);
+      line-height: 1;
+    }
+
+    .cake-title span {
+      display: block;
+      margin-top: 8px;
+      color: rgba(53, 17, 63, 0.68);
+      font-weight: 700;
+    }
+
+    .section-inner {
+      width: min(1120px, 100%);
+      margin: 0 auto;
+    }
+
+    .section-title {
+      display: grid;
+      gap: 14px;
+      margin-bottom: 34px;
+    }
+
+    .section-title.center {
+      text-align: center;
+      justify-items: center;
+    }
+
+    .section-title h2 {
+      font-size: clamp(2.35rem, 6vw, 5.2rem);
+    }
+
+    .section-title p {
+      max-width: 760px;
+      margin: 0;
+      color: rgba(53, 17, 63, 0.74);
+      font-size: 1.08rem;
+      line-height: 1.75;
+    }
+
+    .glass-panel,
+    .message-card,
+    .wish,
+    .timeline-item,
+    .photo-tile,
+    .letter-box {
+      border: 1px solid var(--border);
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.46), rgba(255, 255, 255, 0.18));
+      backdrop-filter: blur(20px);
+      box-shadow: 0 18px 52px rgba(89, 24, 91, 0.14);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: minmax(260px, 0.9fr) minmax(0, 1.1fr);
+      gap: 26px;
+      align-items: stretch;
+    }
+
+    .about-portrait {
+      min-height: 460px;
+      border-radius: 32px;
+      display: grid;
+      place-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-portrait::before {
+      content: "";
+      position: absolute;
+      inset: 20px;
+      border-radius: 26px;
+      border: 1px solid rgba(255, 255, 255, 0.52);
+      background:
+        radial-gradient(circle at 50% 30%, rgba(255, 255, 255, 0.76), transparent 9rem),
+        linear-gradient(145deg, rgba(255, 111, 174, 0.42), rgba(139, 92, 246, 0.36), rgba(255, 209, 102, 0.34));
+    }
+
+    .sister-badge {
+      position: relative;
+      z-index: 1;
+      width: 220px;
+      height: 220px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      border-radius: 50%;
+      color: white;
+      background: linear-gradient(135deg, var(--pink), var(--purple));
+      box-shadow: 0 22px 54px rgba(139, 92, 246, 0.28);
+    }
+
+    .sister-badge span {
+      font-size: 5.6rem;
+      font-weight: 900;
+      line-height: 0.9;
+    }
+
+    .sister-badge small {
+      display: block;
+      margin-top: 8px;
+      font-size: 1rem;
+      font-weight: 800;
+      color: rgba(255, 255, 255, 0.88);
+    }
+
+    .about-copy {
+      border-radius: 32px;
+      padding: clamp(24px, 4vw, 42px);
+    }
+
+    .about-copy h3 {
+      margin: 0 0 18px;
+      color: var(--violet);
+      font-size: clamp(1.7rem, 4vw, 2.8rem);
+    }
+
+    .about-copy p {
+      margin: 0 0 18px;
+      color: rgba(53, 17, 63, 0.76);
+      font-size: 1.08rem;
+      line-height: 1.86;
+    }
+
+    .love-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .love-stats div {
+      min-height: 96px;
+      display: grid;
+      align-content: center;
+      gap: 5px;
+      padding: 16px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.36);
+      border: 1px solid rgba(255, 255, 255, 0.38);
+      text-align: center;
+    }
+
+    .love-stats strong {
+      color: var(--purple);
+      font-size: 1.8rem;
+    }
+
+    .love-stats span {
+      color: rgba(53, 17, 63, 0.66);
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
+
+    .timeline {
+      position: relative;
+      display: grid;
+      gap: 22px;
+      margin-top: 20px;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      transform: translateX(-50%);
+      border-radius: 999px;
+      background: linear-gradient(var(--pink), var(--purple), var(--gold));
+      opacity: 0.62;
+    }
+
+    .timeline-item {
+      width: calc(50% - 34px);
+      padding: 24px;
+      border-radius: 26px;
+      position: relative;
+    }
+
+    .timeline-item:nth-child(odd) {
+      justify-self: start;
+    }
+
+    .timeline-item:nth-child(even) {
+      justify-self: end;
+    }
+
+    .timeline-item::after {
+      content: "";
+      position: absolute;
+      top: 30px;
+      width: 18px;
+      height: 18px;
+      border: 4px solid white;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 0 8px rgba(255, 209, 102, 0.22);
+    }
+
+    .timeline-item:nth-child(odd)::after {
+      right: -44px;
+    }
+
+    .timeline-item:nth-child(even)::after {
+      left: -44px;
+    }
+
+    .timeline-item time {
+      display: inline-block;
+      margin-bottom: 10px;
+      color: var(--purple);
+      font-weight: 900;
+    }
+
+    .timeline-item h3,
+    .message-card h3,
+    .wish h3 {
+      margin: 0 0 10px;
+      color: var(--violet);
+      font-size: 1.35rem;
+    }
+
+    .timeline-item p,
+    .message-card p,
+    .wish p {
+      margin: 0;
+      color: rgba(53, 17, 63, 0.72);
+      line-height: 1.7;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .photo-tile {
+      min-height: 230px;
+      border-radius: 26px;
+      padding: 18px;
+      color: white;
+      display: grid;
+      align-content: end;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      isolation: isolate;
+    }
+
+    .photo-tile::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background: var(--photo);
+      transition: transform 0.45s ease;
+    }
+
+    .photo-tile::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: linear-gradient(to top, rgba(53, 17, 63, 0.7), rgba(53, 17, 63, 0.04));
+    }
+
+    .photo-tile:hover::before {
+      transform: scale(1.08);
+    }
+
+    .photo-tile:nth-child(1),
+    .photo-tile:nth-child(6) {
+      grid-row: span 2;
+      min-height: 476px;
+    }
+
+    .photo-tile h3 {
+      margin: 0 0 7px;
+      font-size: 1.35rem;
+    }
+
+    .photo-tile p {
+      margin: 0;
+      color: rgba(255, 255, 255, 0.84);
+      line-height: 1.45;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .message-card {
+      min-height: 220px;
+      border-radius: 24px;
+      padding: 22px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .message-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 24px 68px rgba(89, 24, 91, 0.2);
+    }
+
+    .message-card .num {
+      display: inline-grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      margin-bottom: 18px;
+      border-radius: 50%;
+      color: white;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--pink), var(--purple));
+      box-shadow: 0 12px 24px rgba(139, 92, 246, 0.22);
+    }
+
+    .message-card.featured {
+      grid-column: 1 / -1;
+      min-height: 280px;
+      padding: clamp(26px, 5vw, 48px);
+      color: white;
+      background:
+        radial-gradient(circle at 85% 18%, rgba(255, 209, 102, 0.56), transparent 17rem),
+        linear-gradient(135deg, rgba(255, 111, 174, 0.92), rgba(139, 92, 246, 0.92));
+      border-color: rgba(255, 255, 255, 0.56);
+    }
+
+    .message-card.featured h3,
+    .message-card.featured p {
+      color: white;
+    }
+
+    .message-card.featured h3 {
+      font-size: clamp(2rem, 5vw, 4rem);
+      max-width: 850px;
+    }
+
+    .message-card.featured p {
+      max-width: 880px;
+      font-size: 1.15rem;
+    }
+
+    .message-card.featured .num {
+      background: rgba(255, 255, 255, 0.24);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+
+    .letter-box {
+      min-height: 360px;
+      border-radius: 32px;
+      padding: clamp(26px, 5vw, 50px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .letter-box::before {
+      content: "";
+      position: absolute;
+      inset: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.46);
+      border-radius: 24px;
+      pointer-events: none;
+    }
+
+    .typewriter {
+      position: relative;
+      z-index: 1;
+      min-height: 250px;
+      white-space: pre-line;
+      color: rgba(53, 17, 63, 0.8);
+      font-size: clamp(1.08rem, 2.2vw, 1.34rem);
+      line-height: 1.85;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 3px;
+      height: 1.1em;
+      margin-left: 4px;
+      background: var(--pink);
+      vertical-align: -0.17em;
+      animation: blink 0.8s step-end infinite;
+    }
+
+    .wishes-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .wish {
+      min-height: 210px;
+      border-radius: 24px;
+      padding: 24px;
+    }
+
+    .wish-icon {
+      display: grid;
+      place-items: center;
+      width: 48px;
+      height: 48px;
+      margin-bottom: 16px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.42);
+      color: var(--purple);
+      font-size: 1.6rem;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.38);
+    }
+
+    .finale {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .finale-card {
+      width: min(980px, 100%);
+      padding: clamp(34px, 6vw, 72px);
+      border-radius: 34px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .finale-card h2 {
+      margin: 0 0 20px;
+      color: transparent;
+      background: linear-gradient(100deg, var(--pink), var(--purple), #b8860b);
+      -webkit-background-clip: text;
+      background-clip: text;
+      font-size: clamp(3rem, 8vw, 7rem);
+      line-height: 1;
+    }
+
+    .finale-card p {
+      max-width: 760px;
+      margin: 0 auto 28px;
+      color: rgba(53, 17, 63, 0.76);
+      font-size: 1.18rem;
+      line-height: 1.75;
+    }
+
+    .fireworks {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .firework {
+      position: absolute;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--gold);
+      animation: explode 1.8s ease-out infinite;
+      box-shadow:
+        0 -44px var(--pink),
+        31px -31px var(--purple),
+        44px 0 var(--gold),
+        31px 31px var(--pink),
+        0 44px var(--purple),
+        -31px 31px var(--gold),
+        -44px 0 var(--pink),
+        -31px -31px var(--purple);
+    }
+
+    .confetti {
+      position: fixed;
+      top: -20px;
+      z-index: 50;
+      width: 10px;
+      height: 16px;
+      pointer-events: none;
+      animation: confettiFall var(--fall, 4s) linear forwards;
+    }
+
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 90;
+      display: none;
+      place-items: center;
+      padding: 24px;
+      background: rgba(28, 8, 35, 0.72);
+      backdrop-filter: blur(14px);
+    }
+
+    .lightbox.show {
+      display: grid;
+    }
+
+    .lightbox-content {
+      width: min(860px, 100%);
+      min-height: min(72vh, 620px);
+      position: relative;
+      border-radius: 30px;
+      overflow: hidden;
+      color: white;
+      display: grid;
+      align-content: end;
+      padding: 34px;
+      box-shadow: 0 34px 100px rgba(0, 0, 0, 0.34);
+      background: var(--lightbox-bg);
+      isolation: isolate;
+    }
+
+    .lightbox-content::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: linear-gradient(to top, rgba(28, 8, 35, 0.82), rgba(28, 8, 35, 0.08));
+    }
+
+    .lightbox h3 {
+      margin: 0 0 8px;
+      font-size: clamp(2rem, 5vw, 4rem);
+    }
+
+    .lightbox p {
+      max-width: 660px;
+      margin: 0;
+      color: rgba(255, 255, 255, 0.86);
+      font-size: 1.08rem;
+      line-height: 1.6;
+    }
+
+    .lightbox button {
+      position: absolute;
+      top: 22px;
+      right: 22px;
+      width: 46px;
+      height: 46px;
+      color: white;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(12px);
+      font-size: 1.4rem;
+    }
+
+    footer {
+      padding: 34px 22px 46px;
+      text-align: center;
+      color: rgba(53, 17, 63, 0.62);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes pulseHeart {
+      0%, 100% { transform: rotate(45deg) scale(1); }
+      50% { transform: rotate(45deg) scale(1.15); }
+    }
+
+    @keyframes loadBar {
+      to { width: 100%; }
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(110vh) rotate(45deg) scale(0.75); opacity: 0; }
+      12% { opacity: 0.7; }
+      88% { opacity: 0.7; }
+      100% { transform: translateY(-14vh) rotate(65deg) scale(1.08); opacity: 0; }
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.22; transform: rotate(45deg) scale(0.6); }
+      50% { opacity: 1; transform: rotate(45deg) scale(1.35); }
+    }
+
+    @keyframes balloonDrift {
+      0%, 100% { transform: translate3d(0, 0, 0) rotate(-4deg); }
+      50% { transform: translate3d(20px, -34px, 0) rotate(4deg); }
+    }
+
+    @keyframes slowSpin {
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes shine {
+      0%, 60% { transform: translateX(-120%); }
+      100% { transform: translateX(120%); }
+    }
+
+    @keyframes flicker {
+      from { transform: translateX(-50%) rotate(-45deg) scale(0.92); }
+      to { transform: translateX(-50%) rotate(-35deg) scale(1.08); }
+    }
+
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+
+    @keyframes explode {
+      0% { transform: scale(0.15); opacity: 0; }
+      16% { opacity: 1; }
+      100% { transform: scale(1.7); opacity: 0; }
+    }
+
+    @keyframes confettiFall {
+      0% { transform: translate3d(0, -20px, 0) rotate(0deg); opacity: 1; }
+      100% { transform: translate3d(var(--drift), 105vh, 0) rotate(720deg); opacity: 0; }
+    }
+
+    @media (max-width: 960px) {
+      .hero-inner,
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .portrait-stage {
+        min-height: 500px;
+      }
+
+      .timeline::before {
+        left: 12px;
+      }
+
+      .timeline-item {
+        width: calc(100% - 38px);
+        justify-self: end;
+      }
+
+      .timeline-item:nth-child(odd),
+      .timeline-item:nth-child(even) {
+        justify-self: end;
+      }
+
+      .timeline-item:nth-child(odd)::after,
+      .timeline-item:nth-child(even)::after {
+        left: -36px;
+        right: auto;
+      }
+
+      .gallery-grid,
+      .cards-grid,
+      .wishes-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .photo-tile:nth-child(1),
+      .photo-tile:nth-child(6) {
+        grid-row: span 1;
+        min-height: 260px;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .nav {
+        align-items: center;
+        border-radius: 24px;
+      }
+
+      .brand span:last-child {
+        display: none;
+      }
+
+      section {
+        padding: 78px 18px;
+      }
+
+      .hero {
+        padding-top: 96px;
+      }
+
+      .portrait-stage {
+        min-height: 430px;
+      }
+
+      .cake-card {
+        min-height: 400px;
+      }
+
+      .cake {
+        transform: scale(0.86);
+      }
+
+      .gallery-grid,
+      .cards-grid,
+      .wishes-grid,
+      .love-stats {
+        grid-template-columns: 1fr;
+      }
+
+      .photo-tile {
+        min-height: 240px;
+      }
+
+      .message-card {
+        min-height: auto;
+      }
+
+      .lightbox-content {
+        min-height: 72vh;
+        padding: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="loading-screen" id="loading">
+    <div class="loader-card">
+      <div class="loader-heart"></div>
+      <h1>For Prathyusha Akka</h1>
+      <p>Wrapping 27 years of love, laughter, strength, and blessings into one little surprise.</p>
+      <div class="progress"><span></span></div>
+    </div>
+  </div>
+
+  <div class="ambient" id="ambient" aria-hidden="true"></div>
+
+  <nav class="nav" aria-label="Birthday navigation">
+    <a class="brand" href="#home" aria-label="Back to birthday hero">
+      <span class="brand-mark">27</span>
+      <span>Geetha to Prathyusha Akka</span>
+    </a>
+    <div class="nav-links">
+      <a href="#about">Prathyusha</a>
+      <a href="#journey">Journey</a>
+      <a href="#cards">27 Cards</a>
+      <a href="#letter">Letter</a>
+      <a href="#finale">Finale</a>
+    </div>
+    <button class="music-btn" id="musicBtn" type="button" aria-label="Play birthday music">♪</button>
+  </nav>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-inner">
+        <div class="hero-copy-wrap reveal">
+          <p class="eyebrow">A premium birthday surprise from Geetha</p>
+          <h1>Happy 27th <span>Birthday, Prathyusha Akka</span></h1>
+          <p class="hero-copy">
+            Today is for the sister who turns ordinary days into safe places, who carries love with grace,
+            and who deserves a celebration as beautiful as her heart.
+          </p>
+          <div class="button-row">
+            <a class="primary-btn" href="#letter">Open My Letter</a>
+            <a class="ghost-btn" href="#cards">Read 27 Wishes</a>
+          </div>
+        </div>
+        <div class="portrait-stage reveal">
+          <div class="halo"></div>
+          <div class="cake-card">
+            <div class="cake" aria-label="Animated birthday cake">
+              <div class="candle"><span class="flame"></span></div>
+              <div class="tier" style="--bottom: 112px; --width: 150px; --color: #ff9cc8;"></div>
+              <div class="tier" style="--bottom: 58px; --width: 195px; --color: #c4a2ff;"></div>
+              <div class="tier" style="--bottom: 4px; --width: 230px; --color: #ffd166;"></div>
+            </div>
+            <div class="cake-title">
+              <strong>27</strong>
+              <span>Years of being deeply loved</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="section-inner">
+        <div class="section-title reveal">
+          <p class="eyebrow">About Prathyusha Akka</p>
+          <h2>The heart of so many happy memories.</h2>
+        </div>
+        <div class="about-grid">
+          <div class="about-portrait glass-panel reveal">
+            <div class="sister-badge">
+              <div><span>P</span><small>Prathyusha Akka</small></div>
+            </div>
+          </div>
+          <div class="about-copy glass-panel reveal">
+            <h3>To the sister who feels like home</h3>
+            <p>
+              Prathyusha Akka, you are warmth in human form. Your love has a way of making people breathe easier,
+              smile wider, and believe that everything will be okay.
+            </p>
+            <p>
+              From Geetha's heart to yours: thank you for the guidance, the care, the tiny jokes, the
+              protective love, and the countless moments where your presence became the gift.
+            </p>
+            <div class="love-stats">
+              <div><strong>27</strong><span>Golden years</span></div>
+              <div><strong>∞</strong><span>Memories</span></div>
+              <div><strong>1</strong><span>Irreplaceable Prathyusha Akka</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="journey">
+      <div class="section-inner">
+        <div class="section-title center reveal">
+          <p class="eyebrow">Journey Timeline</p>
+          <h2>A life blooming beautifully.</h2>
+          <p>Every season has added something priceless: courage, kindness, wisdom, laughter, and a glow that keeps getting brighter.</p>
+        </div>
+        <div class="timeline">
+          <article class="timeline-item reveal">
+            <time>Chapter 1</time>
+            <h3>The little star arrives</h3>
+            <p>A beautiful soul entered the world and quietly began becoming everyone's reason to smile.</p>
+          </article>
+          <article class="timeline-item reveal">
+            <time>Childhood</time>
+            <h3>Joy in tiny things</h3>
+            <p>Small games, sweet talks, family moments, and the kind of laughter that stays in the walls forever.</p>
+          </article>
+          <article class="timeline-item reveal">
+            <time>Growing Up</time>
+            <h3>Grace and strength</h3>
+            <p>You learned, loved, protected, and grew into someone with both softness and courage.</p>
+          </article>
+          <article class="timeline-item reveal">
+            <time>Sisterhood</time>
+            <h3>Geetha's forever person</h3>
+            <p>Through every ordinary day and special moment, your bond became a treasure beyond words.</p>
+          </article>
+          <article class="timeline-item reveal">
+            <time>Today</time>
+            <h3>Twenty-seven and radiant</h3>
+            <p>This birthday marks another year of your beautiful heart touching the lives around you.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="cards">
+      <div class="section-inner">
+        <div class="section-title center reveal">
+          <p class="eyebrow">27 Heartfelt Cards</p>
+          <h2>Twenty-seven reasons you are loved.</h2>
+          <p>One card for every year of your beautiful journey, with the final card shining brightest.</p>
+        </div>
+        <div class="cards-grid" id="cardsGrid"></div>
+      </div>
+    </section>
+
+    <section id="letter">
+      <div class="section-inner">
+        <div class="section-title reveal">
+          <p class="eyebrow">Emotional Letter</p>
+          <h2>From Geetha's heart.</h2>
+        </div>
+        <div class="letter-box reveal">
+          <div class="typewriter" id="typewriter"></div><span class="cursor" aria-hidden="true"></span>
+        </div>
+      </div>
+    </section>
+
+    <section id="wishes">
+      <div class="section-inner">
+        <div class="section-title center reveal">
+          <p class="eyebrow">Wishes</p>
+          <h2>May this year be gentle, grand, and golden.</h2>
+        </div>
+        <div class="wishes-grid">
+          <article class="wish reveal"><div class="wish-icon">✦</div><h3>Peace</h3><p>May your mind feel light, your heart feel held, and your days feel beautifully calm.</p></article>
+          <article class="wish reveal"><div class="wish-icon">♡</div><h3>Love</h3><p>May you receive the same deep love you give so naturally to everyone around you.</p></article>
+          <article class="wish reveal"><div class="wish-icon">★</div><h3>Dreams</h3><p>May every dream that has been waiting for you find its perfect time to bloom.</p></article>
+          <article class="wish reveal"><div class="wish-icon">☼</div><h3>Joy</h3><p>May your 27th year surprise you with laughter, miracles, and unforgettable moments.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="finale" id="finale">
+      <div class="fireworks" id="fireworks" aria-hidden="true"></div>
+      <div class="finale-card glass-panel reveal">
+        <h2>Happy Birthday, Prathyusha Akka!</h2>
+        <p>
+          From Geetha, with endless love: may this birthday wrap you in every blessing you have given others.
+          You are celebrated today, cherished always, and loved beyond measure.
+        </p>
+        <button class="primary-btn" id="celebrateBtn" type="button">Launch Celebration</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Made with love by Geetha for her beloved Prathyusha Akka's 27th birthday.
+  </footer>
+
+  <script>
+    const ambient = document.getElementById("ambient");
+    const colors = ["#ff6fae", "#8b5cf6", "#ffd166", "#ffffff"];
+
+    function random(min, max) {
+      return Math.random() * (max - min) + min;
+    }
+
+    function createAmbient() {
+      for (let i = 0; i < 30; i++) {
+        const heart = document.createElement("span");
+        heart.className = "heart";
+        heart.style.left = `${random(0, 100)}%`;
+        heart.style.setProperty("--duration", `${random(9, 18)}s`);
+        heart.style.animationDelay = `${random(-18, 0)}s`;
+        heart.style.opacity = random(0.35, 0.8);
+        ambient.appendChild(heart);
+      }
+
+      for (let i = 0; i < 64; i++) {
+        const sparkle = document.createElement("span");
+        sparkle.className = "sparkle";
+        sparkle.style.left = `${random(0, 100)}%`;
+        sparkle.style.top = `${random(0, 100)}%`;
+        sparkle.style.setProperty("--duration", `${random(2, 5)}s`);
+        sparkle.style.animationDelay = `${random(-5, 0)}s`;
+        ambient.appendChild(sparkle);
+      }
+
+      for (let i = 0; i < 10; i++) {
+        const balloon = document.createElement("span");
+        balloon.className = "balloon";
+        balloon.style.left = `${random(2, 94)}%`;
+        balloon.style.top = `${random(14, 88)}%`;
+        balloon.style.setProperty("--balloon", colors[i % colors.length]);
+        balloon.style.setProperty("--duration", `${random(8, 15)}s`);
+        balloon.style.animationDelay = `${random(-7, 0)}s`;
+        ambient.appendChild(balloon);
+      }
+    }
+
+    const cardMessages = [
+      "Happy 27th Birthday, Prathyusha Akka. May this special day remind you how deeply loved and treasured you are.",
+      "Akka, your kindness is one of the most beautiful things about you.",
+      "Thank you for always listening, understanding, and caring without expecting anything in return.",
+      "Your smile has the power to make even the hardest days feel lighter.",
+      "I admire your strength and the way you handle every challenge with courage.",
+      "You inspire me to become a better person every day.",
+      "Thank you for being someone I can always count on.",
+      "The world is a better place because someone like you exists in it.",
+      "Your positive energy brightens every room you walk into.",
+      "I am grateful for every memory, every conversation, and every laugh we have shared.",
+      "You have a beautiful heart that touches everyone around you.",
+      "Akka, your support means more to me than words can ever express.",
+      "Thank you for believing in me even when I doubted myself.",
+      "Your happiness is something I genuinely wish for every single day.",
+      "You deserve all the success, love, and blessings life has to offer.",
+      "Thank you for being a source of comfort whenever life feels overwhelming.",
+      "Your patience and understanding make you truly special.",
+      "Every year you become stronger, wiser, and even more inspiring.",
+      "I hope all your dreams find their way to reality.",
+      "Your presence alone makes people feel loved and valued.",
+      "Thank you for being a beautiful example of kindness and grace.",
+      "No matter how busy life gets, I will always cherish our bond.",
+      "Akka, you remind me that genuine people still exist in this world.",
+      "I hope this year brings countless reasons for you to smile.",
+      "Thank you for being not just an Akka, but also a wonderful friend.",
+      "Life gave me a priceless gift when it brought you into my life.",
+      "On your 27th birthday, I want you to know that you are deeply appreciated, endlessly admired, and forever loved. Thank you for being my Akka. Happy Birthday! ❤️🎂✨"
+    ];
+
+    function renderCards() {
+      const grid = document.getElementById("cardsGrid");
+      cardMessages.forEach((message, index) => {
+        const card = document.createElement("article");
+        const number = index + 1;
+        card.className = `message-card reveal${number === 27 ? " featured" : ""}`;
+        card.innerHTML = `
+          <span class="num">${number}</span>
+          <h3>${number === 27 ? "The brightest birthday wish" : "Birthday love #" + number}</h3>
+          <p>${message}</p>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    const letter = `My dearest Prathyusha Akka,
+
+Happy 27th Birthday.
+
+Some people come into our lives as family, but slowly become our comfort, our courage, and our favorite answered prayer. For me, that person is you.
+
+Thank you for every time you cared quietly, every time you understood without making me explain, every time you made me laugh when my heart needed it, and every time your love made life feel softer.
+
+On your birthday, I wish you a year that loves you back. A year of peace, health, success, happy surprises, and dreams becoming real in the most beautiful ways.
+
+You are deeply loved, Prathyusha Akka. Not only today, but in every tiny ordinary moment too.
+
+With all my love,
+Geetha`;
+
+    let hasTypedLetter = false;
+
+    function startTypewriter() {
+      if (hasTypedLetter) return;
+      hasTypedLetter = true;
+      const target = document.getElementById("typewriter");
+      let i = 0;
+      const timer = setInterval(() => {
+        target.textContent = letter.slice(0, i);
+        i++;
+        if (i > letter.length) clearInterval(timer);
+      }, 34);
+    }
+
+    function setupReveals() {
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            if (entry.target.id === "letter") startTypewriter();
+          }
+        });
+      }, { threshold: 0.16 });
+
+      document.querySelectorAll(".reveal, #letter").forEach(el => observer.observe(el));
+    }
+
+    let audioContext;
+    let isPlaying = false;
+    let musicTimer;
+
+    function playNote(freq, start, length) {
+      const oscillator = audioContext.createOscillator();
+      const gain = audioContext.createGain();
+      oscillator.type = "sine";
+      oscillator.frequency.value = freq;
+      gain.gain.setValueAtTime(0.0001, start);
+      gain.gain.exponentialRampToValueAtTime(0.11, start + 0.03);
+      gain.gain.exponentialRampToValueAtTime(0.0001, start + length);
+      oscillator.connect(gain).connect(audioContext.destination);
+      oscillator.start(start);
+      oscillator.stop(start + length + 0.04);
+    }
+
+    function scheduleMelody() {
+      const notes = [392, 392, 440, 392, 523.25, 493.88, 392, 392, 440, 392, 587.33, 523.25];
+      const now = audioContext.currentTime + 0.05;
+      notes.forEach((note, index) => playNote(note, now + index * 0.34, 0.28));
+    }
+
+    function setupMusic() {
+      const btn = document.getElementById("musicBtn");
+      btn.addEventListener("click", async () => {
+        if (!audioContext) audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        if (audioContext.state === "suspended") await audioContext.resume();
+
+        isPlaying = !isPlaying;
+        btn.classList.toggle("playing", isPlaying);
+        btn.textContent = isPlaying ? "Ⅱ" : "♪";
+        btn.setAttribute("aria-label", isPlaying ? "Pause birthday music" : "Play birthday music");
+
+        if (isPlaying) {
+          scheduleMelody();
+          musicTimer = setInterval(scheduleMelody, 4300);
+        } else {
+          clearInterval(musicTimer);
+        }
+      });
+    }
+
+    function burstConfetti(amount = 110) {
+      for (let i = 0; i < amount; i++) {
+        const piece = document.createElement("span");
+        piece.className = "confetti";
+        piece.style.left = `${random(0, 100)}vw`;
+        piece.style.background = colors[Math.floor(random(0, colors.length))];
+        piece.style.setProperty("--drift", `${random(-120, 120)}px`);
+        piece.style.setProperty("--fall", `${random(2.7, 5.4)}s`);
+        piece.style.animationDelay = `${random(0, 0.9)}s`;
+        document.body.appendChild(piece);
+        setTimeout(() => piece.remove(), 6500);
+      }
+    }
+
+    function setupFinale() {
+      const fireworks = document.getElementById("fireworks");
+      for (let i = 0; i < 7; i++) {
+        const firework = document.createElement("span");
+        firework.className = "firework";
+        firework.style.left = `${random(12, 88)}%`;
+        firework.style.top = `${random(10, 72)}%`;
+        firework.style.animationDelay = `${random(-1.8, 0)}s`;
+        fireworks.appendChild(firework);
+      }
+      document.getElementById("celebrateBtn").addEventListener("click", () => burstConfetti(170));
+    }
+
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        document.getElementById("loading").classList.add("hide");
+        burstConfetti(70);
+      }, 2300);
+    });
+
+    createAmbient();
+    renderCards();
+    setupReveals();
+    setupMusic();
+    setupFinale();
+  </script>
+</body>
+</html>
